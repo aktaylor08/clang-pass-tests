@@ -6,11 +6,10 @@ using namespace std;
 class Test{
 public:
   Test();
-
 private:
-
   //Callbacks
   void callbackSimple(const boost::shared_ptr<std_msgs::Int16 const> &msg_in);
+  bool valueCheck(int value);
   ros::NodeHandle 	private_nh_;
   ros::NodeHandle 	nh;
   int _threshold;
@@ -25,22 +24,22 @@ Test::Test(void): private_nh_("~"){
 	msg_sub = nh.subscribe("give_me_info", 1, &Test::callbackSimple, this);
 }
 
-void Test::callbackSimple(const boost::shared_ptr<std_msgs::Int16 const> &in_msg)
-{
-        std_msgs::Int16 msg;
-         if(in_msg-> data > _threshold){
-            msg.data = 42;
-         }else{
-             msg.data = 189;
-         }
-        msg_pub.publish(msg);
+bool valueCheck(int value){
+    return value < _threshold;
 }
 
-
-
+void Test::callbackSimple(const boost::shared_ptr<std_msgs::Int16 const> &in_msg)
+{
+         if(valueCheck(in_msg-> data)){
+            std_msgs::Int16 msg;
+            msg.data = 42;
+            msg_pub.publish(msg);
+         }
+}
 
 int main(int argc, char **argv){
   ros::init(argc, argv, "Kalman");
   Test test;
   ros::spin();
-  return 0; }
+  return 0;
+}
