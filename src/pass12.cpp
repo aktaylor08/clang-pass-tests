@@ -17,6 +17,7 @@ private:
   ros::NodeHandle 	nh;
   int _threshold;
   int _threshold2;
+  int count;
   ros::Subscriber 	msg_sub;
   ros::Publisher 	msg_pub;
   bool pub_now;
@@ -30,6 +31,7 @@ Test::Test(void): private_nh_("~"){
 	msg_pub = nh.advertise<std_msgs::Int16>("publish_topic", 2);
 	msg_sub = nh.subscribe("give_me_info", 1, &Test::callbackSimple, this);
     val = 0;
+    count = 0;
 }
 
 
@@ -40,7 +42,8 @@ Test::publish_value(int to_pub){
 void Test::main_loop(){
     ros::Rate r(10);
     while(ros::ok()){
-        if(val > _threshold2){
+        count++;
+        if(val < count){
             std_msgs::Int16 msg;
             msg.data = val;
             msg_pub.publish(msg);
