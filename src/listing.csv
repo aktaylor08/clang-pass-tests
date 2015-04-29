@@ -1,0 +1,25 @@
+pass1.cpp,publish call inside if statement.
+pass2.cpp,Multiple If statements both contain thresholds, publish inside ifs
+pass3.cpp,Multiple If statements one contains thresholds, publish inside ifs
+pass4.cpp,If statement sets flag that is checked to publish in local function.
+pass5.cpp,If statement sets value that is then compared to count to publish value.
+pass6.cpp,If statement sets value value is published.
+pass7.cpp,Call that checks threshold value in predicate on publish.
+pass8.cpp,If statement then calls publish function.
+pass9.cpp,If sets flag in seperate function and depends on publish
+pass10.cpp,If statement sets a value and then that is published in another thread.
+pass11.cpp,If statements sets a value in one function, that value is checked in a different threshold and publish function called.
+pass12.cpp,If statements sets a value in one function, that value is checked in a different thread publish happens based on that.
+pass13.cpp,Multiple If statements both contain thresholds, publish inside ifs with call
+pass14.cpp,Multiple If statements one contains thresholds, publish inside ifs with call
+pass15.cpp,Sets value than called to publish in function 
+pass16.cpp,If sets flag, Flag checked and publish function called
+pass17.cpp,If sets value, value checked and publish function called
+pass18.cpp,If statement thresh, calls one function, calls other function publish
+pass19.cpp,If statement, call function, check flag, call pub
+pass20.cpp,If statement, call function, check value threshold, call pub
+pass21.cpp,If statement thresh, calls one function, calls other function,calls one more, publish call
+pass22.cpp,If statement thresh, calls one function, calls other function,calls one more threshold, publish call
+pass23.cpp,If statement sets value, published in next function call.
+pass24.cpp,If statemnt sets flag,  published with call in other function
+pass25.cpp,If statement sets value, published from other thread through function call.
