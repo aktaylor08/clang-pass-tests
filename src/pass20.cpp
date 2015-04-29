@@ -16,7 +16,7 @@ private:
   ros::NodeHandle 	nh;
   int _threshold;
   int _thresh2;
-  bool okay;
+  int _val;
   ros::Subscriber 	msg_sub;
   ros::Subscriber 	msg_sub2;
   ros::Publisher 	msg_pub;
@@ -29,7 +29,7 @@ Test::Test(void): private_nh_("~"){
 	msg_pub = nh.advertise<std_msgs::Int16>("publish_topic", 2);
 	msg_sub = nh.subscribe("give_me_info", 1, &Test::callbackSimple, this);
 	msg_sub2 = nh.subscribe("give_me_info", 1, &Test::callbackSimple2, this);
-    okay = false;
+    _val = 0;
 }
 
 
@@ -42,9 +42,7 @@ void Test::callbackSimple(const boost::shared_ptr<std_msgs::Int16 const> &in_msg
 
 void Test::callbackSimple2(const boost::shared_ptr<std_msgs::Int16 const> &in_msg)
 {
-         if(in_msg-> data > _thresh2){
-             okay = true;
-         }
+         _val = in_msg-> data;
 }
 
 void Test::publishValue(int value){
@@ -54,12 +52,8 @@ void Test::publishValue(int value){
 }
 
 void Test::preparePublish(){
-    value = 0;
-    for(int i=0;i< 22; i++){
-        value++;
-    }
-    if(okay){
-        publishValue(value);
+    if(_val < _thresh2){
+        publishValue(22);
     }
 }
 
