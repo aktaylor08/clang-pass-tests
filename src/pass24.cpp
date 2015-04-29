@@ -16,7 +16,7 @@ private:
   ros::NodeHandle 	private_nh_;
   ros::NodeHandle 	nh;
   int _threshold;
-  int _threshold2;
+  bool okay;
   ros::Subscriber 	msg_sub;
   ros::Publisher 	msg_pub;
   bool pub_now;
@@ -26,10 +26,10 @@ private:
 
 Test::Test(void): private_nh_("~"){
     private_nh_.param("thresh_val", _threshold, 42);
-    private_nh_.param("second_threshold", _threshold2, 18);
 	msg_pub = nh.advertise<std_msgs::Int16>("publish_topic", 2);
 	msg_sub = nh.subscribe("give_me_info", 1, &Test::callbackSimple, this);
     val = 0;
+    okay = false;
 }
 
 
@@ -43,7 +43,7 @@ Test::publish_value(int to_pub){
 void Test::main_loop(){
     ros::Rate r(10);
     while(ros::ok()){
-        if(val > _threshold2){
+        if(okay){
             publish_value(13);
         }
         ros::spinOnce();
@@ -54,9 +54,7 @@ void Test::main_loop(){
 void Test::callbackSimple(const boost::shared_ptr<std_msgs::Int16 const> &in_msg)
 {
          if(in_msg-> data > _threshold){
-             val = 10;
-         }else{
-             val = 42;
+             okay = true;
          }
 }
 
@@ -67,4 +65,5 @@ int main(int argc, char **argv){
   ros::init(argc, argv, "Kalman");
   Test test;
   test.main_loop();
-  return 0; }
+  return 0; 
+}
