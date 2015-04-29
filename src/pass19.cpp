@@ -9,9 +9,10 @@ public:
 private:
   //Callbacks
   void callbackSimple(const boost::shared_ptr<std_msgs::Int16 const> &msg_in);
+  void publishValue(int value);
+  void preparePublish();
   ros::NodeHandle 	private_nh_;
   ros::NodeHandle 	nh;
-  void pub_val(int);
   int _threshold;
   ros::Subscriber 	msg_sub;
   ros::Publisher 	msg_pub;
@@ -24,23 +25,28 @@ Test::Test(void): private_nh_("~"){
 	msg_sub = nh.subscribe("give_me_info", 1, &Test::callbackSimple, this);
 }
 
-Test::pub_val(int value){
-    std_msgs::Int16 msg;
-    msg.data = value;
-    msg_pub.publish(msg);
-}
-
 
 void Test::callbackSimple(const boost::shared_ptr<std_msgs::Int16 const> &in_msg)
 {
-    bool publish = false;
          if(in_msg-> data > _threshold){
-             publish = true;
-         }
-         if(publish){
-             pub_value(22);
+             preparePublish();
          }
 }
+
+void Test::publishValue(int value){
+    std_msgs::Int16 msg;
+    msg.data = 42;
+    msg_pub.publish(msg);
+}
+
+void Test::preparePublish(){
+    value = 0;
+    for(int i=0;i< 22; i++){
+        value++;
+    }
+    publishValue(value);
+}
+
 
 int main(int argc, char **argv){
   ros::init(argc, argv, "Kalman");
