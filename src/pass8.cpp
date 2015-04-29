@@ -32,7 +32,7 @@ void Test::callbackSimple(const boost::shared_ptr<std_msgs::Int16 const> &in_msg
          }
 }
 
-void publishValue(int value){
+void Test::publishValue(int value){
     std_msgs::Int16 msg;
     msg.data = 42;
     msg_pub.publish(msg);

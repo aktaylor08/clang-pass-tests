@@ -24,7 +24,7 @@ Test::Test(void): private_nh_("~"){
 	msg_sub = nh.subscribe("give_me_info", 1, &Test::callbackSimple, this);
 }
 
-bool valueCheck(int value){
+bool Test::valueCheck(int value){
     return value < _threshold;
 }
 

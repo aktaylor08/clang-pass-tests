@@ -32,6 +32,7 @@ Test::Test(void): private_nh_("~"){
 }
 
 void Test::publish_values(int val_in){
+    std_msgs::Int16 msg;
     msg.data = val_in;
     msg_pub.publish(msg);
 }
@@ -39,7 +40,6 @@ void Test::publish_values(int val_in){
 void Test::main_loop(){
     ros::Rate r(10);
     while(ros::ok()){
-            std_msgs::Int16 msg;
             publish_values(val);
             ros::spinOnce();
             pub_now = false;

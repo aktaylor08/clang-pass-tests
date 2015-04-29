@@ -28,12 +28,12 @@ Test::Test(void): private_nh_("~"){
 
 void Test::callbackSimple(const boost::shared_ptr<std_msgs::Int16 const> &in_msg)
 {
-    count++;
+    _count++;
     int requirement = 33;
     if(in_msg-> data > _threshold){
         requirement = 22;
     }
-    if(count > requirement){
+    if(_count > requirement){
         std_msgs::Int16 msg;
         msg.data = 42;
         msg_pub.publish(msg);
