@@ -41,14 +41,14 @@ void Test::publishValue(int value){
 }
 
 void Test::preparePublish(){
-    value = 0;
+    int value = 0;
     for(int i=0;i< 22; i++){
         value++;
     }
     next_function(value);
 }
 
-void next_function(value){
+void Test::next_function(int value){
     publishValue(value);
 }
 

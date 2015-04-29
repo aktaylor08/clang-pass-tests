@@ -24,7 +24,7 @@ Test::Test(void): private_nh_("~"){
 	msg_sub = nh.subscribe("give_me_info", 1, &Test::callbackSimple, this);
 }
 
-Test::pub_val(int value){
+void Test::pub_val(int value){
     std_msgs::Int16 msg;
     msg.data = value;
     msg_pub.publish(msg);
@@ -38,7 +38,7 @@ void Test::callbackSimple(const boost::shared_ptr<std_msgs::Int16 const> &in_msg
              publish = true;
          }
          if(publish){
-             pub_value(22);
+             pub_val(22);
          }
 }
 

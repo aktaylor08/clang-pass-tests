@@ -35,7 +35,8 @@ Test::Test(void): private_nh_("~"){
 }
 
 
-Test::publish_value(int to_pub){
+void Test::publish_value(int to_pub){
+    int x = 9;
 }
 
 

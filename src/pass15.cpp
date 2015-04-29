@@ -34,8 +34,8 @@ void Test::pub_value(int value){
 
 void Test::callbackSimple(const boost::shared_ptr<std_msgs::Int16 const> &in_msg)
 {
-    count++;
-    int value = 0
+    _count++;
+    int value = 0;
     if(in_msg-> data > _threshold){
         value = 23;
     }

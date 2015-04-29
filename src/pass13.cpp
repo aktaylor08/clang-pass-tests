@@ -11,7 +11,7 @@ private:
   void callbackSimple(const boost::shared_ptr<std_msgs::Int16 const> &msg_in);
   ros::NodeHandle 	private_nh_;
   ros::NodeHandle 	nh;
-  void pub_val();
+  void publish_val();
   int _threshold;
   int _threshold2;
   ros::Subscriber 	msg_sub;

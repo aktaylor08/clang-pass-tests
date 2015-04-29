@@ -12,7 +12,7 @@ private:
   ros::NodeHandle 	private_nh_;
   ros::NodeHandle 	nh;
   int _threshold;
-  void publish_val(int value);
+  void publish_value(int value);
   ros::Subscriber 	msg_sub;
   ros::Publisher 	msg_pub;
 };

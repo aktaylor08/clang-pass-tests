@@ -40,7 +40,7 @@ void Test::publishValue(int value){
 }
 
 void Test::preparePublish(){
-    value = 0;
+    int value = 0;
     for(int i=0;i< 22; i++){
         value++;
     }

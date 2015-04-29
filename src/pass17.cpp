@@ -9,6 +9,7 @@ public:
 private:
   //Callbacks
   void callbackSimple(const boost::shared_ptr<std_msgs::Int16 const> &msg_in);
+    void pub_value(int);
   ros::NodeHandle 	private_nh_;
   ros::NodeHandle 	nh;
   int _threshold;
@@ -25,7 +26,7 @@ Test::Test(void): private_nh_("~"){
     _count = 0;
 }
 
-void pub_value(int value){
+void Test::pub_value(int value){
     std_msgs::Int16 msg;
     msg.data = 42;
     msg_pub.publish(msg);
@@ -33,12 +34,12 @@ void pub_value(int value){
 
 void Test::callbackSimple(const boost::shared_ptr<std_msgs::Int16 const> &in_msg)
 {
-    count++;
+    _count++;
     int requirement = 33;
     if(in_msg-> data > _threshold){
         requirement = 22;
     }
-    if(count > requirement){
+    if(_count > requirement){
         pub_value(requirement);
         _count = 0;
     }

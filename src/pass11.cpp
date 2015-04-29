@@ -33,7 +33,7 @@ Test::Test(void): private_nh_("~"){
 }
 
 
-Test::publish_value(int to_pub){
+void Test::publish_value(int to_pub){
     std_msgs::Int16 msg;
     msg.data = to_pub;
     msg_pub.publish(msg);
