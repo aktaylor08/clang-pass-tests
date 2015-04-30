@@ -12,6 +12,7 @@ private:
   void callbackSimple2(const boost::shared_ptr<std_msgs::Int16 const> &msg_in);
   ros::NodeHandle 	private_nh_;
   ros::NodeHandle 	nh;
+  void publishValue(int value);
   int val1;
   int val2;
   ros::Subscriber 	msg_sub;
@@ -28,14 +29,17 @@ Test::Test(void): private_nh_("~"){
 	msg_sub2 = nh.subscribe("other_sub", 1, &Test::callbackSimple2, this);
 }
 
+void Test::publishValue(int value){
+    std_msgs::Int16 msg;
+    msg.data = 42;
+    msg_pub.publish(msg);
+}
 
 void Test::callbackSimple(const boost::shared_ptr<std_msgs::Int16 const> &in_msg)
 {
          if(in_msg-> data > val1){
              if(in_msg -> data < val2){
-                std_msgs::Int16 msg;
-                msg.data = 42;
-                msg_pub.publish(msg);
+                publishValue(42);
              }
          }
 }
